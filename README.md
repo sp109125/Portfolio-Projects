@@ -15,6 +15,7 @@ Analytics and BI work spanning public-dataset analysis and live manufacturing-ER
 | [Warehouse Slotting Efficiency](#warehouse-slotting-efficiency-analysis) | Are fast-moving parts slotted close to the shipping dock? (No — and here's the $22K/yr fix) | Epicor BAQ · Power Query/M · DAX · Python |
 | [Cyclistic — BigQuery / SQL build](#cyclistic-bike-share--bigquery--sql-build) | How do members vs. casual riders use the bikes, and where should Cyclistic add stations? | BigQuery SQL · interactive dashboard |
 | [Cyclistic — Power BI build](#cyclistic-bike-share--power-bi-build) | Same question, end-to-end in Power BI from raw multi-schema files | Power BI · Power Query/M · DAX |
+| [Google Fiber Repeat-Caller Analysis](#google-fiber--repeat-caller-analysis) | How often do customers call back after a first inquiry, and where does first-contact resolution fail? | BigQuery SQL · interactive dashboard |
 
 ---
 
@@ -42,6 +43,7 @@ Analytics and BI work spanning public-dataset analysis and live manufacturing-ER
 
 **How it was built:** 663K trips queried and cleaned in BigQuery (joining NYC Citi Bike, NOAA GSOD weather, and US Census boundaries), with weighted aggregation and data-integrity checks (sentinel detection, outlier handling), then a wireframed three-tab interactive dashboard.
 
+
 ---
 
 ## Cyclistic Bike-Share — Power BI build
@@ -55,4 +57,17 @@ Analytics and BI work spanning public-dataset analysis and live manufacturing-ER
 **How it was built:** A full year of public Divvy data — 3.87M rides across four quarterly files in three different schemas. The core prep task was conforming all three (mapping `usertype` → `member_casual`, aligning columns, recalculating ride length from timestamps where the duration field was missing), all in Power Query/M, then DAX measures and Power BI visuals.
 
 *The two Cyclistic projects are deliberate companions: the same business question solved on different data with different toolchains — SQL/BigQuery in one, Power BI's M-and-DAX pipeline in the other.*
+
+
+---
+
+## Google Fiber — Repeat Caller Analysis
+
+**Question:** How often do customers call back after a first inquiry — and where is first-contact resolution failing, by market and issue type?
+
+**Finding:** The overall repeat-call rate is 31.2% and holds steady week to week, but it's badly uneven underneath. Market 3 calls back 44.7% of the time (vs. 17.9% in Market 2), and issue Types 1 and 3 drive two-thirds of repeats. The single worst hotspot is Market 3 × Type 1 at 197% — nearly two callbacks for every first call.
+
+**Recommendation:** Audit Market 3's first-contact handling first, rebuild the Type 1 / Type 3 resolution playbooks, target the Market 3 × Type 1 hotspot directly, and adopt the 31% repeat rate as a weekly-tracked first-contact-resolution KPI.
+
+**How it was built:** Three market contact tables unioned in BigQuery into a single 1,350-row reporting table (64,939 first contacts, Q1 2022), with a defined repeat-rate metric (repeat contacts ÷ first contacts), null-handling (blank cells confirmed as true zeros via the funnel pattern), and a wireframed interactive dashboard with week/month/quarter/year granularity, trend, ranked bars, a repeat funnel, and a market × type heatmap.
 
