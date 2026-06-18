@@ -30,8 +30,6 @@ Analytics and BI work spanning public-dataset analysis and live manufacturing-ER
 
 *Data note: figures use a randomized representative sample that preserves the real distribution's shape and totals without exposing any proprietary part, customer, or volume data. The methodology is real; the numbers are a sanitized stand-in.*
 
-📄 [`Slotting_Efficiency_Analysis.pdf`](./Slotting_Efficiency_Analysis.pdf)
-
 ---
 
 ## Cyclistic Bike-Share — BigQuery / SQL build
@@ -43,8 +41,6 @@ Analytics and BI work spanning public-dataset analysis and live manufacturing-ER
 **Recommendation:** Convert casuals with a weekend/summer-framed offer, forecast and rebalance the fleet on daily weather rather than the calendar, and add capacity in the high-demand Manhattan core first.
 
 **How it was built:** 663K trips queried and cleaned in BigQuery (joining NYC Citi Bike, NOAA GSOD weather, and US Census boundaries), with weighted aggregation and data-integrity checks (sentinel detection, outlier handling), then a wireframed three-tab interactive dashboard.
-
-📄 [`Cyclistic_bike_-_Share.pdf`](./Cyclistic_bike_-_Share.pdf)
 
 ---
 
@@ -60,4 +56,3 @@ Analytics and BI work spanning public-dataset analysis and live manufacturing-ER
 
 *The two Cyclistic projects are deliberate companions: the same business question solved on different data with different toolchains — SQL/BigQuery in one, Power BI's M-and-DAX pipeline in the other.*
 
-📄 [`Cyclistic_Case_Study.pdf`](./Cyclistic_Case_Study.pdf)
