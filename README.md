@@ -14,7 +14,6 @@ Analytics and BI work spanning public-dataset analysis and live manufacturing-ER
 |---|---|---|
 | [Warehouse Slotting Efficiency](#warehouse-slotting-efficiency-analysis) | Are fast-moving parts slotted close to the shipping dock? (No — and here's the $22K/yr fix) | Epicor BAQ · Power Query/M · DAX · Python |
 | [Cyclistic — BigQuery / SQL build](#cyclistic-bike-share--bigquery--sql-build) | How do members vs. casual riders use the bikes, and where should Cyclistic add stations? | BigQuery SQL · interactive dashboard |
-| [Cyclistic — Power BI build](#cyclistic-bike-share--power-bi-build) | Same question, end-to-end in Power BI from raw multi-schema files | Power BI · Power Query/M · DAX |
 | [Google Fiber Repeat-Caller Analysis](#google-fiber--repeat-caller-analysis) | How often do customers call back after a first inquiry, and where does first-contact resolution fail? | BigQuery SQL · interactive dashboard |
 
 ---
@@ -42,21 +41,6 @@ Analytics and BI work spanning public-dataset analysis and live manufacturing-ER
 **Recommendation:** Convert casuals with a weekend/summer-framed offer, forecast and rebalance the fleet on daily weather rather than the calendar, and add capacity in the high-demand Manhattan core first.
 
 **How it was built:** 663K trips queried and cleaned in BigQuery (joining NYC Citi Bike, NOAA GSOD weather, and US Census boundaries), with weighted aggregation and data-integrity checks (sentinel detection, outlier handling), then a wireframed three-tab interactive dashboard.
-
-
----
-
-## Cyclistic Bike-Share — Power BI build
-
-**Question:** Same business question — how do members and casual riders use the bikes differently — built entirely in Power BI to demonstrate the Power Query → DAX workflow end to end.
-
-**Finding:** Members are commuters (12.9 min avg, peak midweek); casuals are leisure users (~3× longer rides, peak weekends, surging in summer from lakefront/tourist stations).
-
-**Recommendation:** A weekend-framed membership offer launched in spring, targeted at lakefront/tourist stations, selling the long-ride economics casual riders already show.
-
-**How it was built:** A full year of public Divvy data — 3.87M rides across four quarterly files in three different schemas. The core prep task was conforming all three (mapping `usertype` → `member_casual`, aligning columns, recalculating ride length from timestamps where the duration field was missing), all in Power Query/M, then DAX measures and Power BI visuals.
-
-*The two Cyclistic projects are deliberate companions: the same business question solved on different data with different toolchains — SQL/BigQuery in one, Power BI's M-and-DAX pipeline in the other.*
 
 
 ---
